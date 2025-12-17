@@ -8,7 +8,7 @@ import (
 
 func main() {
 	server := http.Server{
-		Addr: ":8080",
+		Addr: ":8081",
 	}
 	go func() {
 		if err := server.ListenAndServe(); err != nil {
@@ -28,6 +28,8 @@ func ScanPort(port int) bool {
 	if err != nil {
 		return false
 	}
-	conn.Close()
+	if err := conn.Close(); err != nil {
+		return false
+	}
 	return true
 }
